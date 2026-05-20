@@ -174,33 +174,6 @@ Carla客户端 → 传感器管理模块 → 多模态异常检测模块 → 智
 
     - 决策逻辑：低风险异常，生成“减速”决策，将车速降至10km/h以下，平稳通过异常区域；中风险异常，生成“绕行”决策，调整车辆转向，避开异常目标，同时保持15km/h左右的车速；高风险异常，生成“紧急停车”决策，立即刹停车辆，避免发生碰撞。
 
-3. PID控制：将决策模块生成的指令，转化为车辆的实际控制动作，实现车速和转向的精准控制，核心代码片段如下，该代码通过PID算法计算控制量，确保车辆平稳执行决策，避免急刹、侧滑等问题：
-         `\# PID控制核心代码
-    def control\_vehicle\(self, vehicle, action\):
-    \# 1\. 获取车辆当前状态：计算当前车速（单位：km/h）
-    current\_velocity = vehicle\.get\_velocity\(\)
-    current\_speed\_kmh = 3\.6 \* np\.linalg\.norm\(\[current\_velocity\.x, current\_velocity\.y, current\_velocity\.z\]\)
-    
-    \# 2\. PID计算：根据目标车速和当前车速，计算油门、刹车控制量
-    speed\_output = self\.compute\(action\[\&\#34;speed\&\#34;\], current\_speed\_kmh\)
-    
-    \# 3\. 构造车辆控制指令，确保控制量在合理范围（0\-1）
-    control = carla\.VehicleControl\(\)
-    \# 油门控制：当speed\_output为正时，控制油门，否则油门为0
-    control\.throttle = max\(min\(speed\_output / 100, 1\.0\), 0\.0\) if speed\_output \&gt; 0 else 0\.0
-    \# 刹车控制：当speed\_output为负时，控制刹车，否则使用决策中的刹车值
-    control\.brake = max\(min\(\-speed\_output / 100, 1\.0\), 0\.0\) if speed\_output \&lt; 0 else action\[\&\#34;brake\&\#34;\]
-    \# 转向控制：直接使用决策中的转向值，范围（\-1\.0到1\.0）
-    control\.steer = max\(min\(action\[\&\#34;steer\&\#34;\], 1\.0\), \-1\.0\)
-    \# 紧急停车时拉起手刹，确保车辆快速刹停
-    control\.hand\_brake = True if action\[\&\#34;speed\&\#34;\] == 0 else False
-    
-    \# 4\. 执行控制指令，控制车辆行驶
-    vehicle\.apply\_control\(control\)
-    \# 日志输出，便于调试和演示查看
-    logger\.info\(f\&\#34;当前车速：\{current\_speed\_kmh:\.1f\}km/h \| 目标车速：\{action\[\&\#39;speed\&\#39;\]\}km/h \| 转向：\{action\[\&\#39;steer\&\#39;\]\}\&\#34;\)`
-
-该模块的实现，实现了“检测\-决策\-控制”的全闭环，解决了原有框架无异常检测和智能决策的核心痛点，确保了自动驾驶车辆在非结构化场景下的安全行驶。
 
 ## 3\.4 依赖与环境配置
 
