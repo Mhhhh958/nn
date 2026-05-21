@@ -7,6 +7,8 @@ import threading
 from pynput import keyboard
 import airsim
 import time
+import airsim
+import time
 # ======================= 连接无人机 =======================
 client = airsim.MultirotorClient()
 client.confirmConnection()
