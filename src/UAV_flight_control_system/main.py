@@ -11,7 +11,8 @@ client = airsim.MultirotorClient()
 client.confirmConnection()
 client.enableApiControl(True)
 client.armDisarm(True)
-
+current_vx = 0
+current_vy = 0
 # ======================= 核心参数 =======================
 SPEED = 1.5
 HEIGHT = -3
