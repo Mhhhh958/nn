@@ -10,7 +10,7 @@ from mavros_msgs.srv import CommandBool, SetMode
 import math
 import time
 import threading
-
+import gymnasium as gym
 # ==========================================
 # 迷宫目标配置 (根据 Gazebo 坐标系)
 # ==========================================
