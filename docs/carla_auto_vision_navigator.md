@@ -93,7 +93,6 @@ Carla客户端 → 传感器管理模块 → 多模态异常检测模块 → 智
         logger\.info\(f\&\#34;已设置雨天场景，路面摩擦系数降低，图像添加噪声\&\#34;\)
     elif weather\_type == \&\#34;FOGGY\&\#34;:
         self\.world\.set\_weather\(carla\.WeatherParameters\.Foggy\)
-        logger\.info\(f\&\#34;已设置大雾场景，能见度降低，感知距离缩短\&\#34;\)
     logger\.info\(f\&\#34;成功加载非结构化场景：\{town\_name\}，道路类型：\{UNSTRUCTURED\_SCENES\[town\_name\]\[\&\#39;road\_type\&\#39;\]\}\&\#34;\)
     return True`
 
