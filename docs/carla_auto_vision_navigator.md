@@ -209,6 +209,10 @@ Carla客户端 → 传感器管理模块 → 多模态异常检测模块 → 智
 # 四、运行演示说明
 
 项目可直接运行，步骤简单、操作便捷，演讲时可现场演示（需提前准备Carla服务器和环境配置），通过演示可直观展示项目的核心功能和实际效果。以下是详细的运行演示说明，包括运行前提、演示流程、关键说明和常见问题排查：
+效果图
+![camera_radar_fusion_demo](C:\Users\Administrator\Desktop\camera_radar_fusion_demo.png)
+
+![c3caafd6a1f9734c4d7899a0dd8a3ab6](C:\Users\Administrator\Desktop\c3caafd6a1f9734c4d7899a0dd8a3ab6.gif)
 
 ## 4\.1 运行前提
 
